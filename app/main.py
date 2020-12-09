@@ -19,7 +19,7 @@ def isdangerous(string):
 
 @app.route('/post', methods = ['POST', 'GET'])
 def post():
-    with open('users.yaml', 'r') as users:
+    with open('app/users.yaml', 'r') as users:
         user_data = yaml.load(users, Loader=yaml.FullLoader)
 
     if request.method == 'POST':
@@ -29,7 +29,7 @@ def post():
         if request.form["username"] in user_data:
             if user_data[request.form["username"]]["key"] == request.form["password"]:
                 user_data[request.form["username"]]["post"] = request.form["message"]
-                with open('users.yaml', 'w') as users:
+                with open('app/users.yaml', 'w') as users:
                     users.write(yaml.dump(user_data))
 
                 return render_template("output.html", title="Succesfully posted your announcement", text="We received the data of your post and successfully apdated your page.", redirect_url="/", redirect_text="Home")
@@ -55,7 +55,7 @@ def signup():
             return render_template("output.html", title="Failed to create account", text=f"The account '{user}' already exists, please choose another one.", redirect_url="/signup", redirect_text="Sign Up")
         else:
             user_data[user] = {'key': password, 'post': ''}
-            with open('users.yaml', 'w') as users:
+            with open('app/users.yaml', 'w') as users:
                 users.write(yaml.dump(user_data))
 
             return render_template("output.html", title="Succesfully created your account", text=f"The account '{user}' has been succesfully created.", redirect_url="/", redirect_text="Home")
@@ -64,7 +64,7 @@ def signup():
 
 @app.route('/read')
 def read():
-    with open('users.yaml', 'r') as users:
+    with open('app/users.yaml', 'r') as users:
         user_data = yaml.load(users, Loader=yaml.FullLoader)
 
     isdangerous(request.args.get("username"))
