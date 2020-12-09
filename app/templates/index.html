@@ -1,0 +1,93 @@
+<html>
+	<head>
+		<title>EasyPosting</title>
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+		<link ref="icon" href="https://img.icons8.com/doodle/48/000000/feather.png">
+		<script src="https://cdn.jsdelivr.net/npm/darkreader@4.9.26/darkreader.min.js"></script>
+	</head>
+	<body onload="document.getElementById('posttool').reset();">
+		<script>
+			DarkReader.enable({
+			    brightness: 100,
+    			contrast: 90,
+    			sepia: 10
+			});
+		</script>
+		<div class="container">
+			<div class="row">
+				<div class="col"></div>
+				<div class="col-10 col-sm-8 text-center">
+					<img src="https://img.icons8.com/doodle/48/000000/feather.png" class="mt-3">
+					<h1 class="mt-1">EasyPosting <em>API</em></h1>
+					<p>This is an API, built with Python, Flask and Love, that can help you to easily add announcements to your website.</p>
+					<p>This can be done in a few simple steps:</p>
+					<div class="card align-self-center w-40">
+						<div class="card-body w-40">
+							<h5 class="card-title">Create an account</h5>
+							<p class="card-text">Just go to the Sign Up Page and register.</p>
+							<a href="/signup" class="card-link">Sign Up</a>
+						</div>	
+					</div>
+					<br />
+					<div class="card align-self-center w-40">
+						<div class="card-body w-40">
+							<h5 class="card-title">Post your first announcement</h5>
+							<p class="card-text">Then our tool below to.</p>
+							<p></p>
+        					<form id="posttool" action="{{ url_for('post') }}" method="post">
+								<div class="input-group mb-3">
+  									<input type="text" id="username_post" name="username" class="form-control" placeholder="Username (Do not use special characters)" required>
+								</div>
+
+								<div class="input-group mb-3">
+  									<input type="password" id="key" name="password" class="form-control" placeholder="Password" required>
+								</div>
+
+								<div class="input-group mb-3">
+									<textarea class="form-control" id="message" name="message" placeholder="Type your message here (Do not use special characters)" required></textarea>
+								</div>
+
+								<button onclick="submitPostForm();" class="btn btn-secondary">Post</button>
+							</form>		
+						</div>
+					</div>
+					<br />
+					<div class="card align-self-center w-40">
+						<div class="card-body w-40">
+							<h5 class="card-title">Verify it worked</h5>
+							<p class="card-text">Open your browser in "https://easyposting.heroku.app/read?username=&lt;Your username&gt;" or type your username on the input below and verify that your latest post is online.</p>
+							<p></p>
+							<form id="posttool" action="{{ url_for('read') }}" method="get">
+								<div class="input-group mb-3">
+  									<input type="text" id="username" name="username" class="form-control" placeholder="Username" required>
+								</div>
+								<button type="submit" class="btn btn-secondary">Read</button>
+							</form>
+						</div>
+					</div>
+					<br />
+					<div class="card align-self-center w-40">
+						<div class="card-body w-40">
+							<h5 class="card-title">Add our plugin to your site</h5>
+							<p class="card-text">Go to the GitHub repository of this project and read the README.md file to get instuctions of how to add our plugin to your website.</p>
+						</div>
+					</div>
+					<br />
+					<p><a href="https://icons8.com/icon/80810/feather" class="mb-3 text-muted" style="text-decoration: none;"><b>Feather icon by Icons8</b></a></p>
+					<p><a href="https://github.com/emn178/js-sha1" class="mb-3 text-muted" style="text-decoration: none;"><b>SHA1 hashing library by emn178 on GitHub</b></a></p>
+				</div>
+				<div class="col"></div>
+			</div>
+		</div>
+		<script>
+			function submitPostForm() {
+				password = document.getElementById('key');
+				password.value = sha1(password.value);
+			}
+		</script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+		<script src="{{ url_for('static', filename = 'sha1.js') }}"></script>
+	</body>
+</html>
