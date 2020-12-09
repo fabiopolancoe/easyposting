@@ -42,7 +42,7 @@ def post():
 
 @app.route('/signup', methods = ['POST', 'GET'])
 def signup():
-    with open('users.yaml', 'r') as users:
+    with open('app/users.yaml', 'r') as users:
         user_data = yaml.load(users, Loader=yaml.FullLoader)
 
     if request.method == 'POST':
