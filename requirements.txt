@@ -3,6 +3,6 @@ Jinja2
 click
 itsdangerous
 MarkupSafe
-PyYAML
 Werkzeug
-gunicorn
+firebase_admin
+captcha
